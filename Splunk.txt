@@ -1,0 +1,53 @@
+----------------------INSTALLATION--------------------------------------
+
+Master Server
+==============
+connect to the server using Putty
+
+cd /opt
+
+Splunk 9.1.0.1 for Linux
+
+
+wget -O splunk-9.1.0.1-77f73c9edb85-Linux-x86_64.tgz "https://download.splunk.com/products/splunk/releases/9.1.0.1/linux/splunk-9.1.0.1-77f73c9edb85-Linux-x86_64.tgz"
+
+tar -xvzf splunk-9.1.0.1-77f73c9edb85-Linux-x86_64.tgz
+
+cd /opt/splunk/bin
+
+./splunk start --accept-license
+create username & password
+
+ps -ef | grep splunk
+
+
+publicip:8000
+insert username & password
+
+
+Slave Server
+==============
+connect to the server using Putty
+
+cd /opt
+
+Splunk Universal Forwarder  9.1.0.1
+
+wget -O splunkforwarder-9.1.0.1-77f73c9edb85-Linux-x86_64.tgz "https://download.splunk.com/products/universalforwarder/releases/9.1.0.1/linux/splunkforwarder-9.1.0.1-77f73c9edb85-Linux-x86_64.tgz"
+
+tar -xvzf splunkforwarder-9.1.0.1-77f73c9edb85-Linux-x86_64.tgz
+
+cd /opt/splunk/bin
+
+./splunk start --accept-license
+
+
+create username & password
+
++++++++++++++++++++++++++++ INSTALLATION COMPLETED +++++++++++++++++++++++++
+
+
+_____________________________CONFIGURATION__________________________________
+
+ 
+

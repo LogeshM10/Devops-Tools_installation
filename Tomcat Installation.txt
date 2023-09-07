@@ -1,0 +1,60 @@
+Install Apache Tomcat
+
+yum install java-1.8.0 java-1.8.0-openjdk-devel -y
+
+Download tomcat packages from https://tomcat.apache.org/download-80.cgi onto /opt on EC2 instance
+
+# Create tomcat directory
+
+cd /opt
+wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.78/bin/apache-tomcat-9.0.78.tar.gz
+# tar -xvzf /opt/apache-tomcat-9.0.78.tar.gz
+
+mv apache-tomcat-9.0.78 tomcat9
+
+give executing permissions to startup.sh and shutdown.sh which are under bin.
+
+chmod +x /opt/tomcat9/bin/startup.sh
+chmod +x /opt/tomcat9/bin/shutdown.sh
+
+create link files for tomcat startup.sh and shutdown.sh
+
+ln -s /opt/tomcat9/bin/startup.sh /usr/local/bin/tomcatup
+ln -s /opt/tomcat9/bin/shutdown.sh /usr/local/bin/tomcatdown
+
+# tomcatup
+
+Check point:
+access tomcat application from browser on prot 8080
+
+http://<Public_IP>:8080
+
+now application is accessible on port 8080. but tomcat application doesnt allow to login from browser. changing a default parameter in context.xml does address this issue
+
+#search for context.xml
+find / -name context.xml
+
+/opt/tomcat8/webapps/host-manager/META-INF/context.xml
+/opt/tomcat8/webapps/manager/META-INF/context.xml
+
+above command gives 3 context.xml files. comment () Value ClassName field on files which are under webapp directory. After that restart tomcat services to effect these changes
+
+<!--  <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+         allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" />
+-->
+
+tomcatdown
+tomcatup
+
+
+Update users information in the tomcat-users.xml file goto tomcat home directory and Add below users to conf/tomcat-user.xml file
+ 
+ <role rolename="manager-gui"/>
+ <role rolename="manager-script"/>
+ <role rolename="manager-jmx"/>
+ <role rolename="manager-status"/>
+ <user username="admin" password="admin" roles="manager-gui, manager-script, manager-jmx, manager-status"/>
+ <user username="deployer" password="deployer" roles="manager-script"/>
+ <user username="tomcat" password="s3cret" roles="manager-gui"/>
+ 
+Restart serivce and try to login to tomcat application from the browser. This time it should be Successful

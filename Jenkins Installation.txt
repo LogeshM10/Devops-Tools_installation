@@ -1,0 +1,51 @@
+Installing Git:
+
+yum install git -y
+
+Installing Jenkins
+---------------------
+Installing JAVA:
+-----------------
+yum install java-11-openjdk-devel java-11 -y
+
+Downloading Jenkins and epel repo:
+-----------------------------------------------
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+amazon-linux-extras install epel -y
+
+Installing Jenkins:
+-------------------
+yum install jenkins -y
+systemctl start jenkins
+systemctl enable jenkins
+systemctl status jenkins
+
+Update the server:
+------------------------
+yum update -y
+
+restart the server
+jenkins --version
+2.414.1
+
+cat /var/lib/jenkins/secrets/initialAdminPassword
+
+http://publicip:8080/
+
+
+
+
+
+
+==============================
+CHANGING JENKINS PORT NUMBER
+==============================
+
+vim /etc/systemd/system/jenkins.service
+
+Environment="JENKINS_PORT=----"
+
+ systemctl daemon-reload
+
+ systemctl restart jenkins

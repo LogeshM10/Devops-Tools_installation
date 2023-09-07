@@ -1,0 +1,15 @@
+Getting Trivy installed on CentOS
+
+echo -e "\n[trivy]\nname=Trivy repository\nbaseurl=https://aquasecurity.github.io/trivy-repo/rpm/releases/\$releasever/\$basearch/\ngpgcheck=0\nenabled=1" | sudo tee -a /etc/yum.repos.d/kubernetes.repo
+
+After adding the Trivy repository, update your server and install the trivy package as follows:
+
+sudo yum -y install trivy
+
+
+To install trivy from its RPM source, you will need to get the latest Trivy release then run the commands below:
+
+VER=$(curl -s https://api.github.com/repos/aquasecurity/trivy/releases/latest|grep tag_name|cut -d '"' -f 4|sed 's/v//')
+wget https://github.com/aquasecurity/trivy/releases/download/v${VER}/trivy_${VER}_Linux-64bit.rpm
+
+sudo yum localinstall ./trivy_${VER}_Linux-64bit.rpm

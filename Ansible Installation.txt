@@ -1,0 +1,29 @@
+Installing Ansible in Amazon Linux
+
+Enable the Extra Packages for Enterprise Linux (EPEL) repository by running the following command.
+
+# amazon-linux-extras install epel
+
+Apply the updates to the packages.
+
+# yum update -y
+
+Install Ansible.
+
+# yum install ansible -y
+
+Post installing ansible enable password less acess between ansible master to client servers.
+
+run below command in all linux server:
+
+# ssh-keygen -t rsa
+
+# ssh-copy-id root@server_ip_address
+
+setting hostname on all server:
+
+# vi /etc/hostname
+
+	<hostname>
+
+# hostnamectl set-hostname <hostname>

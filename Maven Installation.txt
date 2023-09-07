@@ -1,0 +1,56 @@
+Maven setup:
+----------------------
+https://maven.apache.org/
+
+cd /opt/
+wget https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz
+
+tar -xvzf apache-maven-3.8.6-bin.tar.gz
+mv apache-maven-3.8.6-bin.tar.gz /tmp/
+mv apache-maven-3.8.6 maven
+
+
+Directly it is not executable
+Post Installation, adding java home path:
+At every reboot bashrc will be executed 
+
+vi /root/.bashrc
+
+#####for Maven ######
+export M2_HOME=/opt/maven
+
+:wq!
+
+Instead of rebooting we are sourcing it
+source /root/.bashrc
+
+Find java path:
+----------------
+cd /usr/lib/jvm/
+ls
+java-11-amazon-corretto.x86_64
+
+Maven needs java to run 
+# vim /root/.bash_profile
+
+JAVA_HOME=/usr/lib/jvm/java-11-amazon-corretto.x86_64
+M2_HOME=/opt/maven
+M2=/opt/maven/bin
+PATH=$PATH:$HOME/bin:$JAVA_HOME:$M2:$M2_HOME
+export PATH
+:wq!
+
+# source /root/.bash_profile
+
+
+Make sure that the above lines are available.
+
+#  mvn -v   It will show the maven version info.
+
+
+--------------------------------------------------------------------------------------------------------------------
+Post completing the setup, access the Jenkins web application through public ip.
+
+http://54.66.44.70:8080/
+
+Adding JDK path in Jenkins tool.
