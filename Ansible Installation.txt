@@ -12,7 +12,7 @@ Install Ansible.
 
 # yum install ansible -y
 
-Post installing ansible enable password less acess between ansible master to client servers.
+Post installing ansible enable password less access between ansible master to client servers.
 
 run below command in all linux server:
 
